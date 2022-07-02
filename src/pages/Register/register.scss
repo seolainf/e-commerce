@@ -1,0 +1,99 @@
+@import "../../scss/app.scss";
+
+.register {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bodyBg;
+  &__form {
+    position: relative;
+    width: 450px;
+
+    &_group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+      label {
+        display: block;
+        margin-bottom: 7px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        font-size: 1rem;
+        color: $blackGray;
+        border: 1px solid $blackGray;
+        &[type="file"] {
+          border: none;
+        }
+      }
+      button {
+        outline: none;
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+        color: $whiteColor;
+        border: none;
+        background-color: $blueColor;
+        cursor: pointer;
+      }
+      span {
+        width: 100%;
+        font-size: 0.9rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .form__btn {
+      margin-top: 30px;
+    }
+    .form__message {
+      .err {
+        color: $redColor;
+      }
+      .success {
+        color: $greenColor;
+      }
+    }
+  }
+  &__container {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: $whiteColor;
+    padding: 20px 30px;
+    border: 1px solid transparent;
+    box-shadow: 0 15px 15px rgba($color: $blueColor, $alpha: 0.6);
+  }
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: $blackGray;
+    text-transform: uppercase;
+  }
+  &__content {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &__avatar {
+    width: 300px;
+    height: 300px;
+    margin-right: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

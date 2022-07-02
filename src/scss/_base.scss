@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap");
+
+html {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: $whiteColor;
+}
+
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main {
+  position: relative;
+  padding: 30px 0;
+}
+.grid {
+  display: grid;
+}
+
+@each $var in $numbers {
+  .grid-col-#{$var} {
+    grid-template-columns: repeat($var, 1fr);
+  }
+}
+
+@each $var in $numbers {
+  .grid-col-md-#{$var} {
+    @include maxWidth(1024px) {
+      grid-template-columns: repeat($var, 1fr);
+    }
+  }
+}
+
+@each $var in $numbers {
+  .grid-col-sm-#{$var} {
+    @include maxWidth(600px) {
+      grid-template-columns: repeat($var, 1fr);
+    }
+  }
+}

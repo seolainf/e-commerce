@@ -1,0 +1,11 @@
+@import "../../scss/app.scss";
+
+.footer {
+  position: relative;
+  padding: 50px 30px;
+  background-color: $blueColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $whiteColor;
+}

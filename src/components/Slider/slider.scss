@@ -1,0 +1,29 @@
+@import "../../scss/app.scss";
+
+.slider {
+  width: 100%;
+  height: 500px;
+  position: relative;
+
+  &__swiper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-pagination-bullet {
+      background-color: $pinkColor;
+      border: 1px solid $bgColor;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: $greenColor;
+    }
+    @include maxWidth(800px) {
+      height: 400px;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import "../../scss/app.scss";
+
+.section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  &__content {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: $blackGray;
+    text-transform: uppercase;
+    background-color: $whiteColor;
+    padding: 10px;
+    z-index: 2;
+  }
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 1px;
+    background-color: $blackGray;
+  }
+}

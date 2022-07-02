@@ -1,0 +1,70 @@
+@import "../../scss/app.scss";
+
+.login {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__form {
+    width: 400px;
+    padding: 20px 30px;
+    background-color: $bodyBg;
+    border: 1px solid transparent;
+    transition: transform 0.2s linear;
+    box-shadow: 0 15px 15px rgba($color: $blueColor, $alpha: 0.6);
+    &_group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+      input {
+        outline: none;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        color: $blackGray;
+      }
+      label {
+        display: block;
+        margin-bottom: 7px;
+        color: $blackGray;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: $whiteColor;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background-color: $blueColor;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+    .form__forget {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: $blackGray;
+    }
+    .form__or {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      color: $blackGray;
+    }
+    .form__other {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: unset;
+    }
+  }
+}
