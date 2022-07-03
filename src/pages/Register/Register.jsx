@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import avatar from "../../assets/images/user.jpg";
 import { auth, db, storage } from "../../firebase/firebaseConfig";
 import "./register.scss";
@@ -12,6 +13,8 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [process, setProcess] = useState(0);
+
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     const id = e.target.id;
@@ -41,6 +44,7 @@ const Register = () => {
         displayName: data.username,
         photoURL: file,
       });
+      navigate("/account/login");
     } catch (err) {
       console.log(err.code);
       if (err.code === "auth/email-already-in-use") {

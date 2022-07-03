@@ -1,0 +1,18 @@
+@import "../../scss/app.scss";
+
+.detail {
+  position: relative;
+  min-height: 80vh;
+  padding: 20px 30px;
+  &__desc {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: $blackGray;
+    padding: 0 50px;
+    li {
+      list-style: decimal-leading-zero;
+      line-height: 1.5;
+    }
+  }
+}

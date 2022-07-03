@@ -16,7 +16,13 @@ const usersSlice = createSlice({
       state.value.push(currentUser);
       localStorage.setItem("users", JSON.stringify(state.value));
     },
+    deleteUser: (state, action) => {
+      const userId = action.payload;
+      console.log(userId);
+      state.value = state.value.filter((user) => user.uid !== userId.uid);
+      localStorage.setItem("users", JSON.stringify(state.value));
+    },
   },
 });
-export const { setUser } = usersSlice.actions;
+export const { setUser, deleteUser } = usersSlice.actions;
 export default usersSlice.reducer;

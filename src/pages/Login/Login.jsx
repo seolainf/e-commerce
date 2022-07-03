@@ -8,10 +8,11 @@ import { setUser } from "../../redux/usersSlice";
 
 const Login = () => {
   const [data, setData] = useState({});
-  const [err, setErr] = useState("");
+  const [message, setMessage] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(err);
+
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -25,12 +26,25 @@ const Login = () => {
         data.email,
         data.password
       );
+
       dispatch(
-        setUser({ userName: res.user.displayName, avatar: res.user.photoURL })
+        setUser({
+          uid: res.user.uid,
+          userName: res.user.displayName,
+          avatar: res.user.photoURL,
+          email: res.user.email,
+        })
       );
       navigate("/");
+      console.log(auth.currentUser);
     } catch (err) {
-      setErr(err);
+      console.log(err);
+      setMessage(err);
+      if (err.code === "auth/user-not-found") {
+        setMessage("sai email hoặc mật khẩu");
+      } else {
+        setMessage("sai mật khẩu");
+      }
     }
   };
   return (
@@ -72,9 +86,9 @@ const Login = () => {
           <span>Google</span>
           <span>Facebook</span>
         </div>
-        {/*  <div className="login__form_group form__other">
-          <span>{err}</span>
-        </div> */}
+        <div className="login__form_group form__other">
+          <span>{message}</span>
+        </div>
       </form>
     </div>
   );

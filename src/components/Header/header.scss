@@ -173,8 +173,31 @@
         width: 100%;
         padding: 10px 20px;
         margin: 5px 0;
+        span {
+          width: 100%;
+          display: block;
+        }
         &:hover {
           background-color: $bodyBg;
+        }
+      }
+      &_logout {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        font-size: 1.1rem;
+        color: $blackGray;
+        cursor: pointer;
+        &:hover {
+          background-color: $bodyBg;
+        }
+        span {
+          width: 100%;
+        }
+        .icon {
+          font-size: 1.5rem;
         }
       }
     }

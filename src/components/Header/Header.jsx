@@ -1,19 +1,24 @@
+import { signOut } from "firebase/auth";
 import { useRef, useState } from "react";
+import { BiSearch } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { RiCloseLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { menuData } from "../../assets/data/headerMenu";
+import cart from "../../assets/images/cart.png";
 import logo from "../../assets/images/logo.png";
 import user from "../../assets/images/user.png";
-import cart from "../../assets/images/cart.png";
+import { auth } from "../../firebase/firebaseConfig";
+import { deleteUser } from "../../redux/usersSlice";
 import "./header.scss";
-import { RiCloseLine } from "react-icons/ri";
-import { BiSearch } from "react-icons/bi";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { useSelector } from "react-redux";
 
 const Header = () => {
   const [openOption, setOpenOption] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
 
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.users.value);
 
   const cartRef = useRef();
@@ -21,6 +26,17 @@ const Header = () => {
 
   const cartActive = () => cartRef.current.classList.toggle("active");
   const menuActive = () => menuRef.current.classList.toggle("active");
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      dispatch(deleteUser({ uid: users[0].uid }));
+      setOpenOption(!openOption);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="header">
       <div className="header__menu">
@@ -61,14 +77,25 @@ const Header = () => {
           </div>
           {openOption && (
             <div className="header__user_content">
-              <Link to={"account/login"}>
-                <span onClick={() => setOpenOption(!openOption)}>
-                  Đăng nhập
-                </span>
-              </Link>
-              <Link to={"account/register"}>
-                <span onClick={() => setOpenOption(!openOption)}>Đăng ký</span>
-              </Link>
+              {users[0] ? (
+                <div className="header__user_content_logout">
+                  <span onClick={handleLogout}>Logout</span>
+                  <FiLogOut className="icon" />
+                </div>
+              ) : (
+                <>
+                  <Link to={"account/login"}>
+                    <span onClick={() => setOpenOption(!openOption)}>
+                      Đăng nhập
+                    </span>
+                  </Link>
+                  <Link to={"account/register"}>
+                    <span onClick={() => setOpenOption(!openOption)}>
+                      Đăng ký
+                    </span>
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>

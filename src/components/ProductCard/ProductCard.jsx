@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ data }) => {
   return (
     <div className="productCard">
-      <Link to={`product/${data.id}`}>
+      <Link to={`/product/${data.id}`}>
         <div className="productCard__image">
           <img src={data.imgURL[0]} alt="" />
         </div>

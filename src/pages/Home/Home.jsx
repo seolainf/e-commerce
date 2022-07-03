@@ -36,7 +36,7 @@ const Home = () => {
         </Grid>
       </div>
       <div className="home__products">
-        <Section title={"sản phẩm mới về"} />
+        <Section title={"hàng mới về"} />
         <Grid col={5} mdCol={3} smCol={2} gap={20}>
           {products &&
             products.map((product) => (
