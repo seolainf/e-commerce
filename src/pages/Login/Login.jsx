@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import "./login.scss";
-import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebaseConfig";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/usersSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebaseConfig";
+import { fetchUserById } from "../../redux/usersSlice";
+import "./login.scss";
 
 const Login = () => {
   const [data, setData] = useState({});
@@ -26,17 +26,8 @@ const Login = () => {
         data.email,
         data.password
       );
-
-      dispatch(
-        setUser({
-          uid: res.user.uid,
-          userName: res.user.displayName,
-          avatar: res.user.photoURL,
-          email: res.user.email,
-        })
-      );
+      dispatch(fetchUserById(res.user.uid));
       navigate("/");
-      console.log(auth.currentUser);
     } catch (err) {
       console.log(err);
       setMessage(err);

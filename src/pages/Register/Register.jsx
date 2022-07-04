@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const Register = () => {
     const userInfo = {
       ...data,
       avatar: file,
-      timestamp: serverTimestamp(),
     };
     try {
       const res = await createUserWithEmailAndPassword(

@@ -1,4 +1,11 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 const colRef = collection(db, "products");
@@ -22,6 +29,27 @@ export const getRandomProducts = async (count) => {
 
 export const getProductById = async (id) => {
   const docRef = doc(db, "products", `${id}`);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
+  }
+};
+
+export const getProductNew = async (type) => {
+  const q = query(colRef, where("categories", "array-contains", `${type}`));
+  const querySnapshot = await getDocs(q);
+  const products = [];
+  querySnapshot.forEach((doc) => {
+    products.push({ id: doc.id, ...doc.data() });
+  });
+  return products;
+};
+
+export const getUserById = async (id) => {
+  const docRef = doc(db, "users", `${id}`);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {

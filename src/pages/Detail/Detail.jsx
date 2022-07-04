@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ProductDetail from "../../components/ProductDetail/ProductDetail";
-import { getProductById, getRandomProducts } from "../../firebase/firebaseFunc";
-import "./detail.scss";
-import Section from "../../components/Section/Section";
 import Grid from "../../components/Grid/Grid";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductDetail from "../../components/ProductDetail/ProductDetail";
+import Section from "../../components/Section/Section";
+import { getProductById, getRandomProducts } from "../../firebase/firebaseFunc";
+import "./detail.scss";
 
 const Detail = () => {
   const { id } = useParams();
+
   const [product, setProduct] = useState({});
   const [productSuggest, setProductSuggest] = useState();
 
@@ -16,7 +17,7 @@ const Detail = () => {
     const fetchData = async () => {
       try {
         const res = await getProductById(id);
-        setProduct(res);
+        setProduct({ id: id, ...res });
         const sugg = await getRandomProducts(5);
         setProductSuggest(sugg);
       } catch (err) {

@@ -1,25 +1,30 @@
 import { signOut } from "firebase/auth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { MdOutlineDeleteForever } from "react-icons/md";
 import { RiCloseLine } from "react-icons/ri";
+import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { menuData } from "../../assets/data/headerMenu";
-import cart from "../../assets/images/cart.png";
+import cartIcon from "../../assets/images/cart.png";
 import logo from "../../assets/images/logo.png";
-import user from "../../assets/images/user.png";
+import avatar from "../../assets/images/user.png";
 import { auth } from "../../firebase/firebaseConfig";
+import { deleteItem } from "../../redux/cartSlice";
 import { deleteUser } from "../../redux/usersSlice";
 import "./header.scss";
 
 const Header = () => {
   const [openOption, setOpenOption] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(false);
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.value);
+  const cart = useSelector((state) => state.cart.value);
 
   const cartRef = useRef();
   const menuRef = useRef();
@@ -36,6 +41,16 @@ const Header = () => {
       console.log(err);
     }
   };
+
+  const handleDeleteItem = (item) => {
+    dispatch(deleteItem(item));
+  };
+
+  useEffect(() => {
+    setTotalPrice(
+      cart.reduce((total, item) => total + item.amount * item.price, 0)
+    );
+  }, [cart]);
 
   return (
     <div className="header">
@@ -71,7 +86,7 @@ const Header = () => {
             onClick={() => setOpenOption(!openOption)}
           >
             <img
-              src={users && users[0]?.avatar ? users[0]?.avatar : user}
+              src={users && users[0]?.avatar ? users[0]?.avatar : avatar}
               alt=""
             />
           </div>
@@ -100,7 +115,7 @@ const Header = () => {
           )}
         </div>
         <div className="header__cart" title="Giỏ hàng">
-          <img src={cart} alt="" onClick={cartActive} />
+          <img src={cartIcon} alt="" onClick={cartActive} />
           <div className="header__cart_content" ref={cartRef}>
             <div className="header__cart_title">
               <span>Giỏ hàng</span>
@@ -108,8 +123,47 @@ const Header = () => {
                 <RiCloseLine />
               </span>
             </div>
-            <div className="header__cart_item">Item1</div>
-            <div className="header__cart_total">Tổng tiền: 100.000</div>
+            <div className="header__cart_products">
+              {cart &&
+                cart.map((item, index) => (
+                  <div className="header__cart_item" key={index}>
+                    <div className="header__cart_item_img">
+                      <img src={item.img[0]} alt="" />
+                    </div>
+                    <div className="header__cart_item_info">
+                      <span>
+                        {item.name} - {item.option.color} - {item.size}
+                      </span>
+                      <div className="header__cart_item_info_option">
+                        <small>{item.amount}</small>
+                        <NumberFormat
+                          value={item.price}
+                          displayType="text"
+                          thousandSeparator={true}
+                          suffix="đ"
+                          className="header__cart_item_info-price"
+                        />
+                      </div>
+                      <div
+                        className="header__cart_item_info_icon"
+                        onClick={() => handleDeleteItem(item)}
+                      >
+                        <MdOutlineDeleteForever />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <div className="header__cart_total">
+              Tổng tiền:{" "}
+              <NumberFormat
+                value={totalPrice}
+                displayType="text"
+                thousandSeparator={true}
+                suffix="đ"
+                className="header__cart_item_info-price"
+              />
+            </div>
             <div className="header__cart_btn">
               <Link to={"/cart"}>
                 <span onClick={cartActive}>Xem giỏ hàng</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./productCard.scss";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ data }) => {
   return (
     <div className="productCard">
-      <Link to={`/product/${data.id}`}>
+      <Link to={`/products/${data.id}`}>
         <div className="productCard__image">
           <img src={data.imgURL[0]} alt="" />
         </div>
@@ -40,4 +40,4 @@ const ProductCard = ({ data }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Products from "./pages/Products/Products";
 import Register from "./pages/Register/Register";
 import "./scss/app.scss";
 
@@ -17,7 +18,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="account/login" element={<Login />} />
             <Route path="account/register" element={<Register />} />
-            <Route path="product/:id" element={<Detail />} />
+            <Route path="products">
+              <Route index element={<Products />} />
+              <Route path=":id" element={<Detail />} />
+            </Route>
           </Route>
         </Routes>
       </main>

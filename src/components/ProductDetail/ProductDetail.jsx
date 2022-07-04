@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./productDetail.scss";
-import NumberFormat from "react-number-format";
-import { RiSubtractLine } from "react-icons/ri";
+import { useEffect, useState } from "react";
 import { HiOutlinePlusSm } from "react-icons/hi";
+import { RiSubtractLine } from "react-icons/ri";
+import NumberFormat from "react-number-format";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+import "./productDetail.scss";
 
 const ProductDetail = (props) => {
   const { data } = props;
+  const dispatch = useDispatch();
+
   const [ImgView, setImgView] = useState(data.imgURL && data.imgURL[0]);
   const [color, setColor] = useState(data.options && data.options[0]?.color);
   const [size, setSize] = useState(data.sizes && data.sizes[0]);
+  const [option, setOption] = useState(data.options && data.options[0]);
   const [productCount, setProductCount] = useState(1);
 
   useEffect(() => {
@@ -17,7 +22,7 @@ const ProductDetail = (props) => {
     setColor(data.options && data.options[0]?.color);
     setSize(data.sizes && data.sizes[0]);
     setProductCount(1);
-
+    setOption(data.options && data.options[0]);
     window.scrollTo(0, 0);
   }, [data]);
 
@@ -27,6 +32,22 @@ const ProductDetail = (props) => {
     } else {
       setProductCount(productCount <= 1 ? 1 : productCount - 1);
     }
+  };
+
+  const handleAdToCart = (e) => {
+    e.preventDefault();
+    dispatch(
+      addToCart({
+        id: data.id,
+        name: data.name,
+        size: size,
+        option: option,
+        amount: productCount,
+        img: data.imgURL,
+        price: data.price,
+        oldPrice: data.oldPrice,
+      })
+    );
   };
 
   return (
@@ -82,7 +103,10 @@ const ProductDetail = (props) => {
                   key={index}
                   style={{ backgroundColor: `${option.clname}` }}
                   title={option.color}
-                  onClick={() => setColor(option.color)}
+                  onClick={() => {
+                    setColor(option.color);
+                    setOption(option);
+                  }}
                 ></span>
               ))}
           </div>
@@ -125,7 +149,7 @@ const ProductDetail = (props) => {
           </div>
         </div>
         <div className="productDetail__info_btn">
-          <button>Thêm vào giỏ hàng</button>
+          <button onClick={handleAdToCart}>Thêm vào giỏ hàng</button>
         </div>
       </div>
     </div>

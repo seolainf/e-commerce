@@ -1,0 +1,14 @@
+@import "../../scss/app.scss";
+
+.products {
+  position: relative;
+  padding: 20px 30px;
+  min-height: 80vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  &__filter {
+    width: 300px;
+    min-height: 80vh;
+  }
+}
