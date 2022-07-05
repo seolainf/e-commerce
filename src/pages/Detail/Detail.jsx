@@ -4,11 +4,14 @@ import Grid from "../../components/Grid/Grid";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import Section from "../../components/Section/Section";
-import { getProductById, getRandomProducts } from "../../firebase/firebaseFunc";
+import {
+  getProductBySlug,
+  getRandomProducts,
+} from "../../firebase/firebaseFunc";
 import "./detail.scss";
 
 const Detail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const [product, setProduct] = useState({});
   const [productSuggest, setProductSuggest] = useState();
@@ -16,8 +19,9 @@ const Detail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getProductById(id);
-        setProduct({ id: id, ...res });
+        const res = await getProductBySlug(slug);
+        console.log(res);
+        setProduct(...res);
         const sugg = await getRandomProducts(5);
         setProductSuggest(sugg);
       } catch (err) {
@@ -25,7 +29,7 @@ const Detail = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   return (
     <div className="detail">

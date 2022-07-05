@@ -27,15 +27,15 @@ export const getRandomProducts = async (count) => {
   return data.slice(start, start + count);
 };
 
-export const getProductById = async (id) => {
-  const docRef = doc(db, "products", `${id}`);
-  const docSnap = await getDoc(docRef);
+export const getProductBySlug = async (slug) => {
+  const q = query(colRef, where("slug", "==", `${slug}`));
 
-  if (docSnap.exists()) {
-    return docSnap.data();
-  } else {
-    console.log("No such document!");
-  }
+  const querySnapshot = await getDocs(q);
+  const item = [];
+  querySnapshot.forEach((doc) => {
+    item.push({ id: doc.id, ...doc.data() });
+  });
+  return item;
 };
 
 export const getProductNew = async (type) => {

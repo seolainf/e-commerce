@@ -6,6 +6,8 @@ import NumberFormat from "react-number-format";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import "./productDetail.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = (props) => {
   const { data } = props;
@@ -48,6 +50,15 @@ const ProductDetail = (props) => {
         oldPrice: data.oldPrice,
       })
     );
+    toast.success("🦄 Thêm thành công!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
@@ -152,6 +163,7 @@ const ProductDetail = (props) => {
           <button onClick={handleAdToCart}>Thêm vào giỏ hàng</button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
