@@ -1,0 +1,13 @@
+@import "../../scss/app.scss";
+
+.info {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  &__item {
+    padding: 5px 0;
+    color: $blackGray;
+  }
+}

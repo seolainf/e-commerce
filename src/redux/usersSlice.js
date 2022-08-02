@@ -20,6 +20,11 @@ const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
+    setUser: (state, action) => {
+      const newUSer = action.payload;
+      state.value.push(newUSer);
+      localStorage.setItem("users", JSON.stringify(state.value));
+    },
     deleteUser: (state, action) => {
       const userId = action.payload;
       state.value = state.value.filter((user) => user.uid !== userId.uid);
@@ -28,9 +33,7 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserById.pending, (state, action) => {
-        console.log("loading");
-      })
+      .addCase(fetchUserById.pending, (state, action) => {})
       .addCase(fetchUserById.fulfilled, (state, action) => {
         state.value.push(action.payload);
         localStorage.setItem("users", JSON.stringify(state.value));

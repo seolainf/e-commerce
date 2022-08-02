@@ -8,7 +8,90 @@
   justify-content: flex-start;
   align-items: flex-start;
   &__filter {
-    width: 300px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 250px;
     min-height: 80vh;
+    box-shadow: 0 0 10px rgba($color: $blackGray, $alpha: 0.6);
+    margin-right: 30px;
+    padding: 10px;
+    @include maxWidth(1024px) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      background-color: $whiteColor;
+      z-index: 99;
+    }
+    &_title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $blackGray;
+      margin-bottom: 10px;
+    }
+    &_content {
+      position: relative;
+      margin-bottom: 15px;
+    }
+    &_btn {
+      width: 100%;
+      button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        background-color: $blueColor;
+        color: $whiteColor;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+  &__main {
+    width: calc(100% - 250px);
+    @include maxWidth(1024px) {
+      width: 100%;
+    }
+    &_heading {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    &_title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $blackGray;
+    }
+    &_sort {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      span {
+        margin-right: 10px;
+      }
+      &_list {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: $bgColor;
+        z-index: 99;
+      }
+      &_item {
+        padding: 10px 20px;
+        cursor: pointer;
+        &.active {
+          background-color: $blackGray;
+          color: $whiteColor;
+        }
+      }
+    }
+    &_selected {
+      padding: 5px;
+      background-color: $bgColor;
+      cursor: pointer;
+    }
   }
 }

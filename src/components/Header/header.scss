@@ -181,12 +181,35 @@
           background-color: $bodyBg;
         }
       }
+      &_info {
+        width: 100%;
+      }
+      &_account {
+        width: 100%;
+        padding: 10px;
+        color: $blackGray;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        a {
+          width: 100%;
+          padding: unset;
+          margin: unset;
+        }
+        &:hover {
+          background-color: $bodyBg;
+        }
+        .icon {
+          font-size: 1.5rem;
+        }
+      }
       &_logout {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px;
+        padding: 10px;
         font-size: 1.1rem;
         color: $blackGray;
         cursor: pointer;
@@ -216,6 +239,20 @@
       &:hover {
         transform: translateY(-4px);
       }
+    }
+    &_count {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      font-size: 0.6rem;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: $redColor;
+      color: $bgColor;
     }
     &_content {
       position: fixed;

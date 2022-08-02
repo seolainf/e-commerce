@@ -3,10 +3,10 @@ import "./productCard.scss";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, type }) => {
   return (
     <div className="productCard">
-      <Link to={`/products/${data.slug}`}>
+      <Link to={`/${type}/${data.slug}`}>
         <div className="productCard__image">
           <img src={data.imgURL[0]} alt="" />
         </div>

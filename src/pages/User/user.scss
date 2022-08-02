@@ -1,0 +1,157 @@
+@import "../../scss/app.scss";
+
+.user {
+  position: relative;
+  min-height: 90vh;
+  padding: 20px 30px;
+  background-color: rgba($color: $bgColor, $alpha: 1);
+  &__title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $blackGray;
+    margin-bottom: 20px;
+  }
+  &__main {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__info {
+    position: relative;
+    width: 300px;
+    min-height: 80vh;
+    background-color: $whiteColor;
+    margin-right: 30px;
+    &_img {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      display: flex;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 150px;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      &_btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: $blackGray;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      &_add {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 250px;
+        padding: 20px;
+        background-color: $whiteColor;
+        box-shadow: 0 5px 10px rgba($color: $blackColor, $alpha: 0.5);
+        border-radius: 15px;
+        z-index: 99;
+        button {
+          width: 100%;
+          margin-top: 20px;
+          padding: 5px 10px;
+          cursor: pointer;
+          border: 1px solid $blackGray;
+          border-radius: 4px;
+        }
+        input {
+          display: none;
+        }
+        label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+          }
+        }
+      }
+      &_title {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.4rem;
+        color: $blackGray;
+        cursor: pointer;
+        &:hover {
+          color: $redColor;
+        }
+      }
+    }
+    &_list {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      a {
+        padding: 7px 20px;
+        width: 100%;
+        color: $blackGray;
+        &.active {
+          color: $redColor;
+          background-color: $bodyBg;
+        }
+      }
+    }
+    &_content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 50px;
+      span {
+        font-size: 0.9rem;
+        color: $blackGray;
+        display: block;
+        margin-bottom: 5px;
+      }
+      button {
+        width: 200px;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        color: $blueColor;
+        border: none;
+        background-color: $bodyBg;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+  &__detail {
+    width: calc(100% - 330px);
+    background-color: $whiteColor;
+    min-height: 80vh;
+
+    &_title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $blackGray;
+      padding: 20px;
+      border-bottom: 1px solid rgba($color: $greenColor, $alpha: 0.2);
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@import "../../scss/app.scss";
+.change {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__form {
+    position: relative;
+    width: 500px;
+    background-color: $bgColor;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba($color: $blackColor, $alpha: 0.5);
+    .form__group {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 10px;
+      input {
+        width: 100%;
+        font-size: 1.2rem;
+        color: $blackGray;
+        padding: 7px 10px;
+        outline: none;
+        border: 1px solid rgba($color: $blackColor, $alpha: 0.4);
+        border-radius: 7px;
+        &.err {
+          border-color: $redColor;
+        }
+        &.success {
+          border-color: $greenColor;
+        }
+      }
+      label {
+        font-size: 0.9rem;
+        color: $blackGray;
+        display: block;
+        margin-bottom: 5px;
+      }
+      span {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        &.err {
+          color: $redColor;
+        }
+        &.success {
+          color: $greenColor;
+        }
+      }
+    }
+    .form__btnGroup {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      a {
+        font-size: 1rem;
+        width: calc(100% - 50% - 10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        color: $blackGray;
+        background-color: rgba($color: $pinkColor, $alpha: 0.1);
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: $whiteColor;
+          background-color: $violetColor;
+        }
+      }
+      button {
+        font-size: 1rem;
+        width: calc(100% - 50% - 10px);
+        background-color: $blueColor;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        color: $whiteColor;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0 0 5px rgba($color: $blackColor, $alpha: 0.4);
+        }
+      }
+    }
+  }
+}

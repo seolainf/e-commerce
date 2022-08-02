@@ -13,18 +13,24 @@ const ProductDetail = (props) => {
   const { data } = props;
   const dispatch = useDispatch();
 
-  const [ImgView, setImgView] = useState(data.imgURL && data.imgURL[0]);
-  const [color, setColor] = useState(data.options && data.options[0]?.color);
-  const [size, setSize] = useState(data.sizes && data.sizes[0]);
-  const [option, setOption] = useState(data.options && data.options[0]);
+  const [ImgView, setImgView] = useState(data?.imgURL && data?.imgURL[0]);
+  const [color, setColor] = useState(data?.options && data.options[0]?.color);
+  const [size, setSize] = useState(data?.sizes && data?.sizes[0]);
+  const [option, setOption] = useState(data?.options && data?.options[0]);
   const [productCount, setProductCount] = useState(1);
+  const [colorActive, setColorActive] = useState(
+    data?.options && data.options[0]
+  );
+  const [sizeActive, setSizeActive] = useState(data?.sizes && data?.sizes[0]);
 
   useEffect(() => {
-    setImgView(data.imgURL && data.imgURL[0]);
-    setColor(data.options && data.options[0]?.color);
-    setSize(data.sizes && data.sizes[0]);
+    setImgView(data?.imgURL && data?.imgURL[0]);
+    setColor(data?.options && data.options[0]?.color);
+    setSize(data?.sizes && data?.sizes[0]);
     setProductCount(1);
-    setOption(data.options && data.options[0]);
+    setOption(data?.options && data?.options[0]);
+    setColorActive(data?.options && data.options[0]);
+    setSizeActive(data?.sizes && data?.sizes[0]);
     window.scrollTo(0, 0);
   }, [data]);
 
@@ -48,14 +54,13 @@ const ProductDetail = (props) => {
         img: data.imgURL,
         price: data.price,
         oldPrice: data.oldPrice,
+        slug: data.slug,
       })
     );
-    toast.success("🦄 Thêm thành công!", {
+    toast.success("Thêm thành công!", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
       draggable: true,
       progress: undefined,
     });
@@ -81,20 +86,20 @@ const ProductDetail = (props) => {
         </div>
       </div>
       <div className="productDetail__info">
-        <h1 className="productDetail__info_title">{data.name}</h1>
+        <h1 className="productDetail__info_title">{data?.name}</h1>
         <div className="productDetail__info_price">
           <NumberFormat
-            value={data.price}
+            value={data?.price}
             displayType="text"
             thousandSeparator={true}
             suffix="đ"
             className="productDetail__info_price-current"
           />
-          {data.oldPrice <= 0 ? (
+          {data?.oldPrice <= 0 ? (
             <></>
           ) : (
             <NumberFormat
-              value={data.oldPrice}
+              value={data?.oldPrice}
               displayType="text"
               thousandSeparator={true}
               suffix="đ"
@@ -110,13 +115,16 @@ const ProductDetail = (props) => {
             {data &&
               data.options?.map((option, index) => (
                 <span
-                  className="productDetail__info_options_item"
+                  className={` productDetail__info_options_item ${
+                    colorActive === option ? "active" : ""
+                  }`}
                   key={index}
                   style={{ backgroundColor: `${option.clname}` }}
                   title={option.color}
                   onClick={() => {
                     setColor(option.color);
                     setOption(option);
+                    setColorActive(option);
                   }}
                 ></span>
               ))}
@@ -130,9 +138,14 @@ const ProductDetail = (props) => {
             {data &&
               data.sizes?.map((size, index) => (
                 <span
-                  className="productDetail__info_options_item"
+                  className={`productDetail__info_options_item ${
+                    sizeActive === size ? "active" : ""
+                  }`}
                   key={index}
-                  onClick={() => setSize(size)}
+                  onClick={() => {
+                    setSize(size);
+                    setSizeActive(size);
+                  }}
                 >
                   {size}
                 </span>

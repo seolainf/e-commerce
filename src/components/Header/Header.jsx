@@ -4,6 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { FiUserCheck } from "react-icons/fi";
 import { RiCloseLine } from "react-icons/ri";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,13 +18,12 @@ import { deleteItem } from "../../redux/cartSlice";
 import { deleteUser } from "../../redux/usersSlice";
 import "./header.scss";
 
-const Header = () => {
+const Header = ({ user }) => {
   const [openOption, setOpenOption] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [totalPrice, setTotalPrice] = useState(false);
 
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.value);
   const cart = useSelector((state) => state.cart.value);
 
   const cartRef = useRef();
@@ -35,7 +35,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      dispatch(deleteUser({ uid: users[0].uid }));
+      dispatch(deleteUser({ uid: user.uid }));
       setOpenOption(!openOption);
     } catch (err) {
       console.log(err);
@@ -65,6 +65,7 @@ const Header = () => {
                 className="header__menu_item"
                 to={menu.path}
                 key={menu.id}
+                onClick={menuActive}
               >
                 <span>{menu.title}</span>
               </NavLink>
@@ -85,17 +86,31 @@ const Header = () => {
             className="header__user_avatar"
             onClick={() => setOpenOption(!openOption)}
           >
-            <img
-              src={users && users[0]?.avatar ? users[0]?.avatar : avatar}
-              alt=""
-            />
+            <img src={user && user?.avatar ? user?.avatar : avatar} alt="" />
           </div>
           {openOption && (
             <div className="header__user_content">
-              {users[0] ? (
-                <div className="header__user_content_logout">
-                  <span onClick={handleLogout}>Logout</span>
-                  <FiLogOut className="icon" />
+              {user ? (
+                <div className="header__user_content_info">
+                  <div
+                    className="header__user_content_account"
+                    onClick={() => setOpenOption(!openOption)}
+                  >
+                    <Link
+                      to={"account"}
+                      className="header__user_content_account_link"
+                    >
+                      Tài khoản
+                    </Link>
+                    <FiUserCheck className="icon" />
+                  </div>
+                  <div
+                    className="header__user_content_logout"
+                    onClick={handleLogout}
+                  >
+                    <span>Đăng xuất</span>
+                    <FiLogOut className="icon" />
+                  </div>
                 </div>
               ) : (
                 <>
@@ -128,7 +143,7 @@ const Header = () => {
                 cart.map((item, index) => (
                   <div className="header__cart_item" key={index}>
                     <div className="header__cart_item_img">
-                      <img src={item.img[0]} alt="" />
+                      <img src={item?.img[0]} alt="" />
                     </div>
                     <div className="header__cart_item_info">
                       <span>
@@ -165,14 +180,15 @@ const Header = () => {
               />
             </div>
             <div className="header__cart_btn">
-              <Link to={"/cart"}>
-                <span onClick={cartActive}>Xem giỏ hàng</span>
+              <Link to={"/cart"} onClick={cartActive}>
+                <span>Xem giỏ hàng</span>
               </Link>
-              <Link to={"/check"}>
-                <span onClick={cartActive}>Thanh toán</span>
+              <Link to={"/check"} onClick={cartActive}>
+                <span>Thanh toán</span>
               </Link>
             </div>
           </div>
+          <div className="header__cart_count">{cart.length}</div>
         </div>
         <div className="header__search">
           <div

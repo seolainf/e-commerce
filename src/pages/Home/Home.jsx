@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getRandomProducts(10);
+        const data = await getRandomProducts(10, "products");
         setProducts(data);
         const newProducts = await getProductNew("new");
         setNews(newProducts);

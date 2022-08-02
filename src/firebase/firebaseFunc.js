@@ -8,9 +8,8 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-const colRef = collection(db, "products");
-
-export const getAllProducts = async () => {
+export const getAllProducts = async (database) => {
+  const colRef = collection(db, `${database}`);
   const querySnapshot = await getDocs(colRef);
   const products = [];
   querySnapshot.forEach((doc) => {
@@ -19,15 +18,16 @@ export const getAllProducts = async () => {
   return products;
 };
 
-export const getRandomProducts = async (count) => {
-  const data = await getAllProducts();
+export const getRandomProducts = async (count, database) => {
+  const data = await getAllProducts(database);
   const max = data.length - count;
   const min = 0;
   const start = Math.floor(Math.random() * (max - min) + min);
   return data.slice(start, start + count);
 };
 
-export const getProductBySlug = async (slug) => {
+export const getProductBySlug = async (slug, database) => {
+  const colRef = collection(db, `${database}`);
   const q = query(colRef, where("slug", "==", `${slug}`));
 
   const querySnapshot = await getDocs(q);
@@ -39,6 +39,7 @@ export const getProductBySlug = async (slug) => {
 };
 
 export const getProductNew = async (type) => {
+  const colRef = collection(db, "products");
   const q = query(colRef, where("categories", "array-contains", `${type}`));
   const querySnapshot = await getDocs(q);
   const products = [];
@@ -53,7 +54,7 @@ export const getUserById = async (id) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    return docSnap.data();
+    return { uid: docSnap.id, ...docSnap.data() };
   } else {
     console.log("No such document!");
   }

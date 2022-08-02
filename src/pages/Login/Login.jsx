@@ -1,30 +1,38 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebaseConfig";
-import { fetchUserById } from "../../redux/usersSlice";
+import { fetchUserById, setUser } from "../../redux/usersSlice";
 import "./login.scss";
+import { FaGooglePlusG } from "react-icons/fa";
 
 const Login = () => {
-  const [data, setData] = useState({});
   const [message, setMessage] = useState("");
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
-    setData({ ...data, [id]: value });
-  };
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleLoginWithEmail = async (values) => {
     try {
       const res = await signInWithEmailAndPassword(
         auth,
-        data.email,
-        data.password
+        values.email,
+        values.password
       );
       dispatch(fetchUserById(res.user.uid));
       navigate("/");
@@ -38,16 +46,38 @@ const Login = () => {
       }
     }
   };
+
+  const handleLoginWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      dispatch(
+        setUser({
+          uid: res.user.uid,
+          avatar: res.user.photoURL,
+          email: res.user.email,
+          username: res.user.displayName,
+        })
+      );
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="login">
-      <form className="login__form">
+      <form
+        className="login__form"
+        onSubmit={handleSubmit(handleLoginWithEmail)}
+      >
         <div className="login__form_group">
           <label htmlFor="email">Email: </label>
           <input
             type="email"
             placeholder="Email"
             id="email"
-            onChange={handleInput}
+            {...register("email")}
+            required
           />
         </div>
         <div className="login__form_group">
@@ -56,11 +86,12 @@ const Login = () => {
             type="password"
             placeholder="Password"
             id="password"
-            onChange={handleInput}
+            required
+            {...register("password")}
           />
         </div>
         <div className="login__form_group">
-          <button onClick={handleLogin}>Đăng nhập</button>
+          <button type="submit">Đăng nhập</button>
         </div>
         <div className="login__form_group form__forget">
           <Link to={"/account/register"}>
@@ -74,8 +105,10 @@ const Login = () => {
           <span>Hoặc</span>
         </div>
         <div className="login__form_group form__other">
-          <span>Google</span>
-          <span>Facebook</span>
+          <div className="google">
+            <FaGooglePlusG className="icon" />
+            <span onClick={handleLoginWithGoogle}>Google</span>
+          </div>
         </div>
         <div className="login__form_group form__other">
           <span>{message}</span>

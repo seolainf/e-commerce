@@ -6,41 +6,43 @@ import { useNavigate } from "react-router-dom";
 import avatar from "../../assets/images/user.jpg";
 import { auth, db, storage } from "../../firebase/firebaseConfig";
 import "./register.scss";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
-  const [data, setData] = useState({});
   const [file, setFile] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [process, setProcess] = useState(0);
 
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
+
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
-    setData({ ...data, [id]: value });
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const handleRegister = async (value) => {
     const userInfo = {
-      ...data,
+      ...value,
       avatar: file,
     };
+
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
-        data.email,
-        data.password
+        value.email,
+        value.password
       );
       const docRef = doc(db, "users", res.user.uid);
-      await setDoc(docRef, userInfo);
+      await setDoc(docRef, { uid: res.user.uid, ...userInfo });
       setMessage("Đăng ký thành công!");
       setMessageType("success");
 
       await updateProfile(auth.currentUser, {
-        displayName: data.username,
+        displayName: value.username,
         photoURL: file,
       });
       navigate("/account/login");
@@ -101,7 +103,10 @@ const Register = () => {
           <div className="register__avatar">
             <img src={file || avatar} alt="" />
           </div>
-          <form action="" className="register__form">
+          <form
+            className="register__form"
+            onSubmit={handleSubmit(handleRegister)}
+          >
             <div className="register__form_group">
               <label htmlFor="username">Họ Tên: </label>
               <input
@@ -109,7 +114,7 @@ const Register = () => {
                 placeholder="Họ tên..."
                 id="username"
                 required
-                onChange={handleInput}
+                {...register("username")}
               />
             </div>
             <div className="register__form_group">
@@ -119,7 +124,7 @@ const Register = () => {
                 placeholder="Email..."
                 id="email"
                 required
-                onChange={handleInput}
+                {...register("email")}
               />
             </div>
             <div className="register__form_group">
@@ -129,7 +134,7 @@ const Register = () => {
                 placeholder="Mật khẩu..."
                 id="password"
                 required
-                onChange={handleInput}
+                {...register("password")}
               />
             </div>
             <div className="register__form_group">
@@ -143,7 +148,7 @@ const Register = () => {
               <span>{process} %</span>
             </div>
             <div className="register__form_group form__btn">
-              <button onClick={handleRegister}>Đăng ký</button>
+              <button type="submit">Đăng ký</button>
             </div>
             <div className="register__form_group form__message">
               <span className={messageType === "success" ? "success" : "err"}>

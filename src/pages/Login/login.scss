@@ -62,9 +62,24 @@
     }
     .form__other {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       margin-bottom: unset;
+      cursor: pointer;
+      .google {
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7px 20px;
+        background-color: $blueColor;
+        color: $whiteColor;
+        .icon {
+          font-size: 1.5rem;
+          margin-right: 10px;
+          color: $greenColor;
+        }
+      }
     }
   }
 }

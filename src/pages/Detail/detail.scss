@@ -5,14 +5,19 @@
   min-height: 80vh;
   padding: 20px 30px;
   &__desc {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     color: $blackGray;
     padding: 0 50px;
     li {
-      list-style: decimal-leading-zero;
+      list-style: circle;
       line-height: 1.5;
+    }
+    &_title {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
   }
 }
