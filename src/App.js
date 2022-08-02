@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import Info from "./components/Info/Info";
 import { getAllProducts } from "./firebase/firebaseFunc";
 import Cart from "./pages/Cart/Cart";
+import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -40,7 +41,7 @@ function App() {
       <main className="main">
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
+            <Route index element={<Home type="products" />} />
             <Route path="account">
               <Route
                 index
@@ -83,6 +84,7 @@ function App() {
               />
             </Route>
             <Route path="cart" element={<Cart />} />
+            <Route path="contact" element={<Contact />} />
           </Route>
         </Routes>
       </main>

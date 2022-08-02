@@ -2,7 +2,7 @@
 
 .products {
   position: relative;
-  padding: 20px 30px;
+  padding: 20px 50px;
   min-height: 80vh;
   display: flex;
   justify-content: flex-start;
@@ -16,13 +16,31 @@
     box-shadow: 0 0 10px rgba($color: $blackGray, $alpha: 0.6);
     margin-right: 30px;
     padding: 10px;
+    transition: transform 0.5s ease-in-out;
     @include maxWidth(1024px) {
       position: absolute;
-      top: 0;
+      top: 20px;
       left: 0;
-      display: none;
+      transform: translateX(-120%);
+      min-height: 100vh;
+      margin-right: unset;
       background-color: $whiteColor;
       z-index: 99;
+    }
+    &.active {
+      transform: translateX(0);
+    }
+    &_close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: $blackGray;
+      display: none;
+      @include maxWidth(1024px) {
+        display: block;
+      }
     }
     &_title {
       font-size: 1.1rem;
@@ -36,6 +54,7 @@
     }
     &_btn {
       width: 100%;
+      margin-top: 70px;
       button {
         width: 100%;
         padding: 10px;
@@ -92,6 +111,15 @@
       padding: 5px;
       background-color: $bgColor;
       cursor: pointer;
+    }
+    &_btn {
+      font-size: 1.5rem;
+      color: $blackGray;
+      cursor: pointer;
+      display: none;
+      @include maxWidth(1024px) {
+        display: block;
+      }
     }
   }
 }

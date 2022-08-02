@@ -4,13 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DB_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MSG_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBgtbZ36FelSKxkrge0Z3UYIeNnamvSVZo",
+  authDomain: "shopping-2d14f.firebaseapp.com",
+  databaseURL:
+    "https://shopping-2d14f-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "shopping-2d14f",
+  storageBucket: "shopping-2d14f.appspot.com",
+  messagingSenderId: "355081589753",
+  appId: "1:355081589753:web:24e776b7a69434bf79e328",
 };
 
 // Initialize Firebase

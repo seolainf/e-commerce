@@ -6,14 +6,14 @@ import Slider from "../../components/Slider/Slider";
 import { getProductNew, getRandomProducts } from "../../firebase/firebaseFunc";
 import "./home.scss";
 
-const Home = () => {
+const Home = ({ type }) => {
   const [products, setProducts] = useState([]);
   const [news, setNews] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getRandomProducts(10, "products");
+        const data = await getRandomProducts(10, `${type}`);
         setProducts(data);
         const newProducts = await getProductNew("new");
         setNews(newProducts);
@@ -22,7 +22,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [type]);
 
   return (
     <div className="home">
@@ -34,7 +34,7 @@ const Home = () => {
         <Grid col={5} mdCol={3} smCol={2} gap={20}>
           {products &&
             products.map((product) => (
-              <ProductCard data={product} key={product.id} />
+              <ProductCard data={product} key={product.id} type={type} />
             ))}
         </Grid>
       </div>
@@ -43,7 +43,7 @@ const Home = () => {
         <Grid col={5} mdCol={3} smCol={2} gap={20}>
           {news &&
             news.map((product) => (
-              <ProductCard data={product} key={product.id} />
+              <ProductCard data={product} key={product.id} type={type} />
             ))}
         </Grid>
       </div>

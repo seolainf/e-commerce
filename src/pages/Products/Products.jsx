@@ -7,7 +7,10 @@ import {
 import CheckBox from "../../components/CheckBox/CheckBox";
 import Grid from "../../components/Grid/Grid";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { FiMenu } from "react-icons/fi";
+import { VscClose } from "react-icons/vsc";
 import "./products.scss";
+import { useRef } from "react";
 
 const Products = ({ data, type }) => {
   const initFilter = {
@@ -18,6 +21,10 @@ const Products = ({ data, type }) => {
 
   const [productsList, setProductsList] = useState(data && data);
   const [filters, setFilters] = useState(initFilter);
+
+  const filterRef = useRef(null);
+
+  const showFilter = () => filterRef.current.classList.toggle("active");
 
   const filterSelect = (type, checked, item) => {
     if (checked) {
@@ -91,8 +98,11 @@ const Products = ({ data, type }) => {
 
   return (
     <div className="products">
-      <div className="products__filter">
-        <div className="products__filter_title">Danh mục sản phẩm</div>
+      <div className="products__filter" ref={filterRef}>
+        <div className="products__filter_close" onClick={showFilter}>
+          <VscClose />
+        </div>
+        <div className="products__filter_title">Sản phẩm</div>
         <div className="products__filter_content">
           {sexFilter &&
             sexFilter.map((sex) => (
@@ -136,6 +146,9 @@ const Products = ({ data, type }) => {
       </div>
       <div className="products__main">
         <div className="products__main_heading">
+          <div className="products__main_btn" onClick={showFilter}>
+            <FiMenu />
+          </div>
           <div className="products__main_title">
             {productsList && productsList.length} Sản phẩm
           </div>
