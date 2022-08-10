@@ -4,8 +4,8 @@ import "./info.scss";
 const Info = ({ data }) => {
   return (
     <div className="info">
-      <div className="info__item">Họ Tên: {data?.username}</div>
-      <div className="info__item">Email: {data?.email}</div>
+      <span className="info__item">Họ Tên: {data?.username}</span>
+      <span className="info__item">Email: {data?.email}</span>
     </div>
   );
 };

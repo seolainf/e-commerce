@@ -262,8 +262,7 @@
       height: 100%;
       min-height: 100vh;
       padding: 20px;
-      visibility: hidden;
-      opacity: 0;
+
       overflow: auto;
       transform: translateX(150%);
       background-color: $whiteColor;
@@ -273,8 +272,6 @@
       z-index: 99;
       &.active {
         transform: translateX(0);
-        visibility: visible;
-        opacity: 1;
       }
       &::-webkit-scrollbar {
         width: 7px;

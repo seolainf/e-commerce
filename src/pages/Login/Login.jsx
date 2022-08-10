@@ -40,7 +40,7 @@ const Login = () => {
       console.log(err);
       setMessage(err);
       if (err.code === "auth/user-not-found") {
-        setMessage("sai email hoặc mật khẩu");
+        setMessage("Tài khoản không tồn tại");
       } else {
         setMessage("sai mật khẩu");
       }
@@ -94,7 +94,7 @@ const Login = () => {
           <button type="submit">Đăng nhập</button>
         </div>
         <div className="login__form_group form__forget">
-          <Link to={"/account/register"}>
+          <Link to={"/account/forget"}>
             <span>Quên mật khẩu</span>
           </Link>
           <Link to={"/account/register"}>
@@ -111,7 +111,7 @@ const Login = () => {
           </div>
         </div>
         <div className="login__form_group form__other">
-          <span>{message}</span>
+          <span className="login__message">{message}</span>
         </div>
       </form>
     </div>

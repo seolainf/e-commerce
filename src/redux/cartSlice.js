@@ -16,33 +16,27 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
     updateItem: (state, action) => {
-      /* const itemUpdate = action.payload;
+      const itemUpdate = action.payload;
 
       const items = state.value.filter(
         (e) =>
           e.size === itemUpdate.size &&
-          e.option.color === itemUpdate.option.color
+          e.option.color === itemUpdate.option.color &&
+          e.slug === itemUpdate.slug
       );
-      
+
       if (items.length > 0) {
-        state.value = state.value = state.value.filter(
+        state.value = state.value.filter(
           (e) =>
             e.id !== itemUpdate.id ||
-            e.amount !== itemUpdate.amount ||
             e.size !== itemUpdate.size ||
             e.option.color !== itemUpdate.option.color ||
             e.slug !== itemUpdate.slug
         );
-        console.log(state.value);
-        state.value = [
-          ...state.value,
-          {
-            ...itemUpdate,
-            id: items[0].id,
-          },
-        ];
+
+        state.value = [...state.value, { ...itemUpdate }];
         localStorage.setItem("cart", JSON.stringify(state.value));
-      } */
+      }
     },
     deleteItem: (state, action) => {
       const itemDelete = action.payload;
@@ -58,17 +52,6 @@ const cartSlice = createSlice({
     },
   },
 });
-
-/* const delItem = (arr, item) => {
-  arr.filter(
-    (e) =>
-      e.id !== item.id ||
-      e.amount !== item.amount ||
-      e.size !== item.size ||
-      e.option.color !== item.option.color ||
-      e.slug !== item.slug
-  );
-}; */
 
 export const { addToCart, deleteItem, updateItem } = cartSlice.actions;
 export default cartSlice.reducer;

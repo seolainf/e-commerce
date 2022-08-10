@@ -146,7 +146,11 @@ const Products = ({ data, type }) => {
       </div>
       <div className="products__main">
         <div className="products__main_heading">
-          <div className="products__main_btn" onClick={showFilter}>
+          <div
+            className="products__main_btn"
+            onClick={showFilter}
+            title="Bộ lọc"
+          >
             <FiMenu />
           </div>
           <div className="products__main_title">

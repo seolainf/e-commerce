@@ -26,8 +26,8 @@ const Header = ({ user }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
 
-  const cartRef = useRef();
-  const menuRef = useRef();
+  const cartRef = useRef(null);
+  const menuRef = useRef(null);
 
   const cartActive = () => cartRef.current.classList.toggle("active");
   const menuActive = () => menuRef.current.classList.toggle("active");
@@ -55,7 +55,7 @@ const Header = ({ user }) => {
   return (
     <div className="header">
       <div className="header__menu">
-        <div className="header__menu_icon" onClick={menuActive}>
+        <div className="header__menu_icon" onClick={menuActive} title="Menu">
           <HiOutlineMenuAlt1 />
         </div>
         <div className="header__menu_content" ref={menuRef}>

@@ -145,7 +145,7 @@ const Register = () => {
                 required
                 onChange={handleUploadFile}
               />
-              <span>{process} %</span>
+              <span className="register__process">{process} %</span>
             </div>
             <div className="register__form_group form__btn">
               <button type="submit">Đăng ký</button>

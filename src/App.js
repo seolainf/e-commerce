@@ -9,6 +9,7 @@ import { getAllProducts } from "./firebase/firebaseFunc";
 import Cart from "./pages/Cart/Cart";
 import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
+import Forget from "./pages/ForgetPassword/Forget";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Products from "./pages/Products/Products";
@@ -64,6 +65,7 @@ function App() {
               />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
+              <Route path="forget" element={<Forget />} />
             </Route>
 
             <Route path="products">
