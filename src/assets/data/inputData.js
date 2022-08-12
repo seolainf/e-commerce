@@ -1,4 +1,4 @@
-export const inputData = [
+export const changeData = [
   {
     id: "currentPass",
     title: "Mật khẩu hiện tại",

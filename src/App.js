@@ -12,6 +12,8 @@ import Detail from "./pages/Detail/Detail";
 import Forget from "./pages/ForgetPassword/Forget";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import NotFound from "./pages/NotFound/NotFound";
+import Pay from "./pages/Pay/Pay";
 import Products from "./pages/Products/Products";
 import Register from "./pages/Register/Register";
 import User from "./pages/User/User";
@@ -87,6 +89,8 @@ function App() {
             </Route>
             <Route path="cart" element={<Cart />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="check" element={<Pay />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </main>

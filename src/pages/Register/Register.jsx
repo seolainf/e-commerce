@@ -2,11 +2,11 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../assets/images/user.jpg";
 import { auth, db, storage } from "../../firebase/firebaseConfig";
 import "./register.scss";
-import { useForm } from "react-hook-form";
 
 const Register = () => {
   const [file, setFile] = useState("");
@@ -29,7 +29,6 @@ const Register = () => {
       ...value,
       avatar: file,
     };
-
     try {
       const res = await createUserWithEmailAndPassword(
         auth,

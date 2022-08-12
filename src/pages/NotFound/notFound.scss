@@ -1,0 +1,43 @@
+@import "../../scss/app.scss";
+.notfound {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 90vh;
+  padding: 50px;
+  &_img {
+    width: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &_content {
+    width: 50%;
+    p {
+      width: max-content;
+      font-size: 1.1rem;
+      padding: 10px 17px;
+      color: $whiteColor;
+      background-color: #9babd4;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 2rem;
+      color: $blackGray;
+      margin-bottom: 30px;
+    }
+    a {
+      color: $whiteColor;
+      padding: 10px;
+      background-color: $blueColor;
+      border-radius: 10px;
+      &:hover {
+        background-color: rgba($color: $blueColor, $alpha: 0.9);
+      }
+    }
+  }
+}

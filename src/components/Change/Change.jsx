@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { inputData } from "../../assets/data/inputData";
+import { changeData } from "../../assets/data/inputData";
 import { auth, db } from "../../firebase/firebaseConfig";
 import { deleteUser } from "../../redux/usersSlice";
 import "./change.scss";
@@ -65,8 +65,8 @@ const Change = ({ data }) => {
   return (
     <div className="change">
       <form className="change__form" onSubmit={handleSubmit(handleChange)}>
-        {inputData &&
-          inputData.map((item) => (
+        {changeData &&
+          changeData.map((item) => (
             <div className="form__group" key={item.id}>
               <label htmlFor={item.id}>{item.title}</label>
               <input

@@ -6,12 +6,14 @@ import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteItem, updateItem } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 import "./cart.scss";
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const cartData = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUpdateItem = (type, item) => {
     if (type === "+") {
@@ -138,7 +140,7 @@ const Cart = () => {
           />
         </div>
         <div className="cart__pay_btn">
-          <button>Thanh toán</button>
+          <button onClick={() => navigate("/check")}>Thanh toán</button>
         </div>
       </div>
     </div>

@@ -1,0 +1,55 @@
+@import "../../scss/app.scss";
+
+.payCard {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  &__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  &__img {
+    position: relative;
+    width: 50px;
+    height: 70px;
+    margin-right: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  &__quantity {
+    position: absolute;
+    top: -3px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    color: $whiteColor;
+    background-color: $greenColor;
+  }
+  &__info {
+    flex: 1;
+    p {
+      color: $blackGray;
+      font-size: 0.9rem;
+    }
+    span {
+      font-size: 0.9rem;
+      color: $blackGray;
+    }
+  }
+  &__price {
+    font-size: 0.9rem;
+    color: $blackGray;
+  }
+}

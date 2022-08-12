@@ -1,0 +1,157 @@
+@import "../../scss/app.scss";
+
+.pay {
+  position: relative;
+  min-height: 90vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  &__content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    @include maxWidth(800px) {
+      flex-direction: column;
+    }
+  }
+  &__title {
+    font-size: 1.1rem;
+    color: $blackGray;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+  }
+  &__address {
+    width: 50%;
+    padding: 20px 30px;
+    &_message {
+      color: $redColor;
+    }
+    @include maxWidth(800px) {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+  }
+  &_form {
+    &__group {
+      margin-bottom: 15px;
+      input,
+      select {
+        width: 100%;
+        color: $blackGray;
+        font-size: 1rem;
+        outline: none;
+        border: 1px solid rgba($color: #000000, $alpha: 0.2);
+        padding: 10px;
+        border-radius: 5px;
+        &:focus {
+          box-shadow: 0 0 10px 5px rgba($color: $blackGray, $alpha: 0.1);
+        }
+      }
+      label {
+        font-size: 0.9rem;
+        color: $blackGray;
+        display: block;
+        margin-bottom: 7px;
+      }
+      select:disabled {
+        border-color: rgba($color: $blackColor, $alpha: 0.2);
+        background-color: rgba($color: $blackColor, $alpha: 0.2);
+      }
+      textarea {
+        width: 100%;
+        min-height: 100px;
+        color: $blackGray;
+        font-size: 1rem;
+        outline: none;
+        border: 1px solid rgba($color: $blackColor, $alpha: 0.2);
+        padding: 10px;
+        border-radius: 5px;
+        &:focus {
+          box-shadow: 0 0 10px 5px rgba($color: $blackGray, $alpha: 0.1);
+        }
+      }
+      input.err,
+      select.err {
+        border-color: $redColor;
+      }
+      input.success,
+      select.success {
+        border-color: $blueColor;
+      }
+    }
+  }
+  &__order {
+    width: 50%;
+    padding: 20px;
+    background-color: $bgColor;
+    min-height: 90vh;
+    @include maxWidth(800px) {
+      width: 100%;
+    }
+    &_item {
+      max-height: 400px;
+      padding: 15px 0;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba($color: $blackGray, $alpha: 0.5);
+      }
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    }
+    &_price {
+      margin: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 1.1rem;
+        color: $blackGray;
+        &:nth-child(2) {
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: $blueColor;
+        }
+      }
+    }
+    &_btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: $blackGray;
+        .icon {
+          font-size: 1.4rem;
+          transition: transform 0.3s ease-in-out;
+        }
+        &:hover {
+          color: rgba($color: $blueColor, $alpha: 0.8);
+          .icon {
+            transform: translateX(-5px);
+          }
+        }
+      }
+      button {
+        width: 100px;
+        padding: 10px;
+        outline: none;
+        color: $whiteColor;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        background-color: $blueColor;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba($color: $blueColor, $alpha: 0.9);
+        }
+      }
+    }
+  }
+}
