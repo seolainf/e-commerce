@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./contact.scss";
 import { MdCall, MdEmail, MdLocationPin, MdFacebook } from "react-icons/md";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 
 const Contact = () => {
-  const { register, handleSubmit } = useForm({
+  const [err, setErr] = useState("");
+  const [message, setMessage] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: { username: "", email: "", message: "" },
   });
 
   const handleMessage = (value) => {
     console.log(value);
+    if (errors.username?.type === "required") {
+      console.log("mm");
+    }
   };
   return (
     <div className="contact">
@@ -49,23 +59,40 @@ const Contact = () => {
             <label htmlFor="username">Họ tên</label>
             <input
               type="text"
-              placeholder="Nguyen Van A"
+              placeholder="Họ tên"
               id="username"
-              {...register("username")}
+              {...register("username", { required: true })}
             />
+            {errors.username?.type === "required" && (
+              <span className="err">Thông tin bắt buộc!</span>
+            )}
           </div>
           <div className="form__group">
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              placeholder="anv@email.com"
+              placeholder="Email"
               id="email"
-              {...register("email")}
+              {...register("email", {
+                required: true,
+                pattern:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              })}
             />
+            {errors.email?.type === "required" && (
+              <span className="err">Thông tin bắt buộc!</span>
+            )}
+            {errors.email?.type === "pattern" && (
+              <span className="err">Email không hợp lệ!</span>
+            )}
           </div>
           <div className="form__group">
             <label htmlFor="message">Message</label>
-            <textarea id="message" {...register("message")}></textarea>
+            <textarea
+              id="message"
+              {...register("message")}
+              placeholder="Message"
+            />
           </div>
           <button type="submit">Send</button>
         </form>
