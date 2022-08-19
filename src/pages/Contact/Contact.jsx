@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import "./contact.scss";
-import { MdCall, MdEmail, MdLocationPin, MdFacebook } from "react-icons/md";
-import { BsTwitter, BsInstagram } from "react-icons/bs";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { BsInstagram, BsTwitter } from "react-icons/bs";
+import { MdCall, MdEmail, MdFacebook, MdLocationPin } from "react-icons/md";
+import "./contact.scss";
 
 const Contact = () => {
-  const [err, setErr] = useState("");
-  const [message, setMessage] = useState("");
-
   const {
     register,
     handleSubmit,
